@@ -1,6 +1,7 @@
 package com.epam.gym;
 
 import com.epam.gym.model.Trainer;
+import com.epam.gym.model.Training;
 import com.epam.gym.service.CustomerService;
 import com.epam.gym.service.TrainerService;
 import com.epam.gym.service.TrainingService;
@@ -30,26 +31,15 @@ public class GymApplication {
 
 		log.info("\n\n>>>> START  ==============\n");
 
-		Optional<Trainer> trainer1Optional = trainerService.findById(1);
-		Optional<Trainer> trainer2Optional = trainerService.findById(2);
+		Optional<Trainer> optionalTrainer1 = trainerService.findById(1);
+		Optional<Trainer> optionalTrainer2 = trainerService.findById(2);
+		Optional<Training> optionalTraining1 = trainingService.findById(1);
+		Optional<Training> optionalTraining2 = trainingService.findById(2);
 
-        trainer1Optional.ifPresent(trainer -> log.info(trainer.toString()));
-		trainer2Optional.ifPresent(trainer -> log.info(trainer.toString()));
-
-		//		inMemoryStorage.getCustomers().values().stream().forEach(x -> log.info(x.toString()));
-		//		log.info("^^^^ TRAINEES\n");
-		//		inMemoryStorage.getTrainers().values().stream().forEach(x -> log.info(x.toString()));
-		//		log.info("^^^^ TRAINERS\n");
-		//		inMemoryStorage.getTrainings().values().stream().forEach(x -> log.info(x.toString()));
-		//		log.info("^^^^ TRAININGS\n");
-		//
-		//		log.info("\n\tSTART\n");
-		//		log.info("list of TRAINEES:");
-		//		inMemoryStorage.getCustomers().values().stream().forEach(x -> log.info(x.toString()));
-		//		log.info("list of TRAINERS:");
-		//		inMemoryStorage.getTrainers().values().stream().forEach(x -> log.info(x.toString()));
-		//		log.info("list of TRAININGS:");
-		//		inMemoryStorage.getTrainings().values().stream().forEach(x -> log.info(x.toString()));
+		optionalTrainer1.ifPresent(trainer -> log.info(trainer.toString()));
+		optionalTrainer2.ifPresent(trainer -> log.info(trainer.toString()));
+		optionalTraining1.ifPresent(training -> log.info(training.toString()));
+		optionalTraining2.ifPresent(training -> log.info(training.toString()));
 
 		log.info("\n\n>>>> END  ==============\n");
 

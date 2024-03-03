@@ -28,10 +28,10 @@ public class Training {
     @Column(name = "TRAINING_NAME")
     private String trainingName;
 
-    // switch (trainingTypeId with type AND I SHOULD GET IT FROM TYPE TABLE)
-    // private TrainingType trainingType;
-    @Column(name = "TRAINING_TYPE_ID")
-    private int TrainingTypeID;
+    @ManyToOne(fetch = FetchType.EAGER, optional = true)
+    @JoinColumn(name = "TRAINING_TYPE_ID", referencedColumnName = "TRAINING_TYPE_ID", nullable = true)
+    @Enumerated(EnumType.ORDINAL)
+    private TrainingType trainingType;
 
     @Column(name = "TRAINING_DATE")
     private Date trainingDate;
