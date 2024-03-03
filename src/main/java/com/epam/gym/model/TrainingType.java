@@ -20,4 +20,8 @@ public class TrainingType {
     @Column(name = "TRAINING_TYPE_NAME")
     private TrainingTypeEnum trainingType;
 
+    @Override
+    public String toString() {
+        return "TrainingType{" + "trainingType=" + trainingType + '}';
+    }
 }

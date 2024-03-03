@@ -14,14 +14,14 @@ import java.util.Objects;
 @Table(name = "TRAINERS")
 public class Trainer {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "TRAINER_ID")
     private int trainerId;
 
-//    @Column(name = "TRAINING_TYPE_ID")
-//    private int trainingTypeID;
+    //    @Column(name = "TRAINING_TYPE_ID")
+    //    private int trainingTypeID;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @ManyToOne(fetch = FetchType.EAGER, optional = true)
     @JoinColumn(name = "TRAINING_TYPE_ID", referencedColumnName = "TRAINING_TYPE_ID", nullable = true)
     @Enumerated(EnumType.ORDINAL)
     private TrainingType specialization;
@@ -31,7 +31,9 @@ public class Trainer {
     private int userId;
 
     @Override
-    public String toString() {return "Trainer{" + "trainerId=" + trainerId + '}';}
+    public String toString() {
+        return "Trainer{" + "trainerId=" + trainerId + ", specialization=" + specialization + ", userId=" + userId + '}';
+    }
 
     @Override
     public boolean equals(Object o) {
