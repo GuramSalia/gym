@@ -1,5 +1,6 @@
 package com.epam.gym;
 
+import com.epam.gym.model.Customer;
 import com.epam.gym.model.Trainer;
 import com.epam.gym.model.Training;
 import com.epam.gym.service.CustomerService;
@@ -35,11 +36,15 @@ public class GymApplication {
 		Optional<Trainer> optionalTrainer2 = trainerService.findById(2);
 		Optional<Training> optionalTraining1 = trainingService.findById(1);
 		Optional<Training> optionalTraining2 = trainingService.findById(2);
+		Optional<Customer> optionalCustomer1 = customerService.findById(1);
+		Optional<Customer> optionalCustomer2 = customerService.findById(2);
 
 		optionalTrainer1.ifPresent(trainer -> log.info(trainer.toString()));
 		optionalTrainer2.ifPresent(trainer -> log.info(trainer.toString()));
 		optionalTraining1.ifPresent(training -> log.info(training.toString()));
 		optionalTraining2.ifPresent(training -> log.info(training.toString()));
+		optionalCustomer1.ifPresent(training -> log.info(training.toString()));
+		optionalCustomer2.ifPresent(training -> log.info(training.toString()));
 
 		log.info("\n\n>>>> END  ==============\n");
 
