@@ -1,7 +1,15 @@
 package com.epam.gym.model;
 
-import java.util.Date;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
+import java.util.Date;
+import java.util.Objects;
+
+@Getter
+@Setter
+@Slf4j
 public class Training {
     private int trainingId;
     private int trainerId;
@@ -13,4 +21,18 @@ public class Training {
     private int TrainingTypeID;
     private Date date;
     private int durationInMinutes;
+
+    @Override
+    public String toString() {return "Training{" + "trainingId=" + trainingId + ", trainingName='" + trainingName + '\'' + '}';}
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Training training = (Training) o;
+        return getTrainingId() == training.getTrainingId() && Objects.equals(getTrainingName(), training.getTrainingName());
+    }
+
+    @Override
+    public int hashCode() {return Objects.hash(getTrainingId(), getTrainingName());}
 }
