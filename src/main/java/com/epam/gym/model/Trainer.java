@@ -18,9 +18,13 @@ public class Trainer {
     @Column(name = "TRAINER_ID")
     private int trainerId;
 
-    @Column(name = "TRAINING_TYPE_ID")
-    private int trainingTypeID;
-    //    private TrainingType specialization;
+//    @Column(name = "TRAINING_TYPE_ID")
+//    private int trainingTypeID;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @JoinColumn(name = "TRAINING_TYPE_ID", referencedColumnName = "TRAINING_TYPE_ID", nullable = true)
+    @Enumerated(EnumType.ORDINAL)
+    private TrainingType specialization;
 
     // need to delete later
     @Column(name = "USER_ID")
