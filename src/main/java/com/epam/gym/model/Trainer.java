@@ -11,14 +11,19 @@ import java.util.Objects;
 @Setter
 @Slf4j
 @Entity
-@Table(name = "Trainers")
+@Table(name = "TRAINERS")
 public class Trainer {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @Column(name = "TRAINER_ID")
     private int trainerId;
+
+    @Column(name = "TRAINING_TYPE_ID")
     private int trainingTypeID;
     //    private TrainingType specialization;
+
     // need to delete later
+    @Column(name = "USER_ID")
     private int userId;
 
     @Override

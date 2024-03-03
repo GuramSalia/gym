@@ -12,12 +12,17 @@ import java.util.Objects;
 @Setter
 @Slf4j
 @Entity
-@Table(name = "Customers")
+@Table(name = "CUSTOMERS")
 public class Customer {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @Column(name = "CUSTOMER_ID")
     private int customerId;
+
+    @Column(name = "DATE_OF_BIRTH")
     private Date dob;
+
+    @Column(name = "ADDRESS")
     private String address;
 
     @Override
