@@ -15,15 +15,22 @@ import java.util.Objects;
 @Table(name = "TRAININGS")
 public class Training {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "TRAINING_ID")
-    private int trainingId;
+    private Integer trainingId;
 
-    @Column(name = "CUSTOMER_ID")
-    private int customerId;
+    //    @Column(name = "CUSTOMER_ID")
+    @ManyToOne
+    @JoinColumn(name = "CUSTOMER_ID")
+    private Customer customer;
+//    private Integer customerId;
 
-    @Column(name = "TRAINER_ID")
-    private int trainerId;
+
+    //    @Column(name = "TRAINER_ID")
+    @ManyToOne
+    @JoinColumn(name = "TRAINER_ID")
+    private Trainer trainer;
+//    private Integer trainerId;
 
     @Column(name = "TRAINING_NAME")
     private String trainingName;
