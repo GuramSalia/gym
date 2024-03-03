@@ -36,8 +36,8 @@ public class GymApplication {
 		Optional<Trainer> optionalTrainer2 = trainerService.findById(2);
 		Optional<Training> optionalTraining1 = trainingService.findById(1);
 		Optional<Training> optionalTraining2 = trainingService.findById(2);
-		Optional<Customer> optionalCustomer1 = customerService.findById(1);
-		Optional<Customer> optionalCustomer2 = customerService.findById(2);
+		Optional<Customer> optionalCustomer1 = customerService.findById(3);
+		Optional<Customer> optionalCustomer2 = customerService.findById(4);
 
 		optionalTrainer1.ifPresent(trainer -> log.info(trainer.toString()));
 		optionalTrainer2.ifPresent(trainer -> log.info(trainer.toString()));

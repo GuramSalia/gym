@@ -12,27 +12,26 @@ import java.util.Objects;
 @Slf4j
 @Entity
 @Table(name = "TRAINERS")
-public class Trainer {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "TRAINER_ID")
-    private int trainerId;
-
-    //    @Column(name = "TRAINING_TYPE_ID")
-    //    private int trainingTypeID;
+@PrimaryKeyJoinColumn(name = "USER_ID")
+public class Trainer extends User{
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Column(name = "TRAINER_ID")
+//    private Integer trainerId;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = true)
     @JoinColumn(name = "TRAINING_TYPE_ID", referencedColumnName = "TRAINING_TYPE_ID", nullable = true)
     @Enumerated(EnumType.ORDINAL)
     private TrainingType specialization;
 
-    // need to delete later
+    @OneToOne(fetch = FetchType.EAGER, optional = true)
+    @JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID", nullable = true)
     @Column(name = "USER_ID")
-    private int userId;
+    private Integer userId;
 
     @Override
     public String toString() {
-        return "Trainer{" + "trainerId=" + trainerId + ", specialization=" + specialization + ", userId=" + userId + '}';
+        return "Trainer{" + "trainerId=" + userId + " " + getFirstName() + " " + getLastName() + '}';
     }
 
     @Override
@@ -40,9 +39,9 @@ public class Trainer {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Trainer trainer = (Trainer) o;
-        return getTrainerId() == trainer.getTrainerId();
+        return userId == trainer.getUserId();
     }
 
     @Override
-    public int hashCode() {return Objects.hash(getTrainerId());}
+    public int hashCode() {return Objects.hash(getUserId());}
 }

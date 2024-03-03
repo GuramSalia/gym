@@ -1,5 +1,5 @@
 -- Insert Trainers
-INSERT INTO USERS (FIRST_NAME, LAST_NAME, USERNAME, PASSWORD, IS_ACTIVE) VALUES
+INSERT INTO GYM_USERS (FIRST_NAME, LAST_NAME, USERNAME, PASSWORD, IS_ACTIVE) VALUES
 ('Tim', 'Smith', 'Tim.Smith', 'abcdefghij', TRUE),
 ('Sam', 'Jones', 'Sam.Jones', 'bcdefghijk', TRUE),
 ('John', 'Doe', 'John.Doe', 'ijklmnopqr', TRUE),
