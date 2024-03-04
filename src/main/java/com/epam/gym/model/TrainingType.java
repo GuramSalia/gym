@@ -3,6 +3,8 @@ package com.epam.gym.model;
 import jakarta.persistence.*;
 import lombok.Setter;
 
+import java.util.Objects;
+
 @Entity
 @Setter
 @Table(name = "TRAINING_TYPES")
@@ -26,5 +28,18 @@ public class TrainingType {
     @Override
     public String toString() {
         return "TrainingType{" + "trainingType=" + trainingType + '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TrainingType that = (TrainingType) o;
+        return trainingType == that.trainingType;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(trainingType);
     }
 }

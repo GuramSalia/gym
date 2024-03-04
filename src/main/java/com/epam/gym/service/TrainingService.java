@@ -64,9 +64,14 @@ public class TrainingService {
 
     private boolean areTrainingTypesMatching(TrainingType type1, TrainingType type2) {
         boolean matching = false;
+
         if (type1 != null && type2 != null) {
+//            log.warn(type1 + " - type1; "+ type2+" - type2");
+//            log.warn("Types equal: "+String.valueOf(type1.equals(type2)));
             matching = type1.equals(type2);
-        } else if (type1 == null && type2 == null) {
+        }
+
+        if (type1 == null && type2 == null) {
             matching = true;
         }
         return matching;

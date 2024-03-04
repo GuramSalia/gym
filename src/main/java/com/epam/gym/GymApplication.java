@@ -95,39 +95,28 @@ public class GymApplication {
         customer3SavedOptional.ifPresent(customer -> log.info(customer.toString()));
 
         log.info("updatePassword customer_3 :");
-        customer_3 = customer3SavedOptional.get();
+
         customer3SavedOptional = customerService.updatePassword(customer_3, customer_3.getUsername(), "1122", "2233");
 
         log.info("activateActiveCustomer customer_3: ");
-        boolean activatedActive = customerService.activateCustomer(
-                customer3SavedOptional.get(),
-                customer3SavedOptional.get().getUsername(),
-                "2233");
+        boolean activatedActive = customerService.activateCustomer(customer3SavedOptional.get(), customer3SavedOptional.get()
+                                                                                                                       .getUsername(), "2233");
         log.info("activateActiveCustomer customer_3: " + activatedActive);
 
         log.info("deactivateActiveCustomer customer_3:");
-        boolean deactivatedActive = customerService.deactivateCustomer(
-                customer3SavedOptional.get(),
-                customer3SavedOptional.get().getUsername(),
-                "2233");
+        boolean deactivatedActive = customerService.deactivateCustomer(customer3SavedOptional.get(), customer3SavedOptional.get()
+                                                                                                                           .getUsername(), "2233");
         log.info("deactivateActiveCustomer customer_3: " + deactivatedActive);
 
         log.info("deactivateInactiveCustomer customer_3:");
-        boolean deactivatedInactive = customerService.deactivateCustomer(
-                customer3SavedOptional.get(),
-                customer3SavedOptional.get().getUsername(),
-                "2233");
+        boolean deactivatedInactive = customerService.deactivateCustomer(customer3SavedOptional.get(), customer3SavedOptional.get()
+                                                                                                                             .getUsername(), "2233");
         log.info("deactivateInactiveCustome customer_3: " + deactivatedInactive);
 
-
         log.info("activateInactiveCustomer customer_3:");
-        boolean activatedInactive = customerService.activateCustomer(
-                customer3SavedOptional.get(),
-                customer3SavedOptional.get().getUsername(),
-                "2233");
+        boolean activatedInactive = customerService.activateCustomer(customer3SavedOptional.get(), customer3SavedOptional.get()
+                                                                                                                         .getUsername(), "2233");
         log.info("deactivateInactiveCustomer customer_3: " + activatedInactive);
-
-
 
         log.info("delete customer_1:");
         Customer customer = new Customer();
@@ -151,7 +140,6 @@ public class GymApplication {
         log.info("deactivate inactive trainer");
         log.info("activate inactive trainer");
 
-
         log.info("create training with trainer of the same training type");
         log.info("create training with trainer of the different training type");
 
@@ -174,17 +162,77 @@ public class GymApplication {
         trainer_3.setSpecialization(PILATES);
         trainerService.create(trainer_3);
 
+        log.info("update trainer: new specification YOGA");
+        trainer_3.setSpecialization(YOGA);
+        trainer_3 = trainerService.update(trainer_3, trainer_3.getUsername(), "123").get();
+        log.info("updated trainer: " + trainer_3 + " with new specialization: " + trainer_3.getSpecialization());
 
-//        log.info("update trainer");
-//        log.info("updated trainer password");
-//        log.info("activate active trainer");
-//        log.info("deactivate active trainer");
-//        log.info("deactivate inactive trainer");
-//        log.info("activate inactive trainer");
-//
-//
-//        log.info("create training with trainer of the same training type");
-//        log.info("create training with trainer of the different training type");
+        log.info("updated trainer password: new password '321'");
+        trainer_3 = trainerService.updatePassword(trainer_3, trainer_3.getUsername(), "123", "321").get();
+        log.info("updated trainer: " + trainer_3 + " with new password: " + trainer_3.getPassword());
+
+        log.info("activate active trainer");
+        boolean result = trainerService.activateTrainer(trainer_3, trainer_3.getUsername(), "321");
+        log.info("activate active trainer: " + result);
+
+        log.info("deactivate active trainer");
+        boolean result2 = trainerService.deactivateTrainer(trainer_3, trainer_3.getUsername(), "321");
+        log.info("deactivate active trainer: " + result2);
+
+        log.info("deactivate inactive trainer");
+        boolean result3 = trainerService.deactivateTrainer(trainer_3, trainer_3.getUsername(), "321");
+        log.info("deactivate inactive trainer: " + result3);
+
+        log.info("activate inactive trainer");
+        boolean result4 = trainerService.activateTrainer(trainer_3, trainer_3.getUsername(), "321");
+        log.info("deactivate inactive trainer: " + result4);
+
+        log.info("create training with trainer of the same different type");
+
+        customer_3 = customerService.getByUsername("John.Doe1", "2233").get();
+        Training training_3 = new Training();
+        training_3.setTrainingDateEasy(2024, 5, 24);
+        training_3.setTrainingName("training number 3");
+        training_3.setTrainingDurationInMinutes(90);
+        training_3.setTrainer(trainer_3);
+        training_3.setCustomer(customer_3);
+        training_3.setTrainingType(PILATES);
+        Optional<Training> training3_Optional = trainingService.create(training_3);
+        if (training3_Optional.isEmpty()) {
+            log.info(">>>>> training not created... trainer type: " + trainer_3.getSpecialization() + " | training " +
+                    "type: " + training_3.getTrainingType());
+        } else {
+            log.error("----- training created for different types. trainer type: " + trainer_3.getSpecialization() +
+                    " | " + "training type: " + training_3.getTrainingType());
+        }
+
+        log.info("create training with trainer of the different training type");
+        Training training_4 = new Training();
+        training_4.setTrainingDateEasy(2024, 5, 25);
+        training_4.setTrainingName("training number 4");
+        training_4.setTrainingDurationInMinutes(90);
+        training_4.setTrainer(trainer_3);
+        training_4.setCustomer(customer_3);
+        training_4.setTrainingType(YOGA);
+        Optional<Training> training4_Optional = trainingService.create(training_4);
+
+
+        Optional<Training> optional = trainingService.create(training_4);
+        if (optional.isEmpty()) {
+            log.error("????? training not created for same types. trainer type: " + trainer_3.getSpecialization() +
+                    " | " +
+                    "training type: " + training_4.getTrainingType());
+        } else {
+            log.info(">>>>> training created ... trainer type: " + trainer_3.getSpecialization() + " | " +
+                    "training type: " + training_4.getTrainingType());
+        }
+
+        //        log.info("create training with trainer of the different training type");
+
+
+
+        log.info("deleting customer cascades to deleting training");
+        customerService.delete("John.Doe1", "2233");
 
 
         log.info("\n\n>>>> END  ==============\n");
