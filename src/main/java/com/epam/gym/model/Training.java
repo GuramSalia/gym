@@ -5,8 +5,11 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
+
+import static java.time.LocalDate.now;
 
 @Getter
 @Setter
@@ -45,6 +48,28 @@ public class Training {
 
     @Column(name = "TRAINING_DURATION")
     private int trainingDurationInMinutes;
+
+    public void setTrainingDateEasy(Integer year, Integer month, Integer day) {
+        if (year > now().getYear()) {
+            log.info("birth year cannot be in the future");
+            return;
+        }
+
+        if (month > 11 || month < 0) {
+            log.info("birth month cannot be in the future");
+            return;
+        }
+
+        if (day > 31 || day < 0) {
+            log.info("birth day cannot be in the future");
+            return;
+        }
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.YEAR, year);
+        cal.set(Calendar.MONTH, month);
+        cal.set(Calendar.DAY_OF_MONTH, day);
+        setTrainingDate(cal.getTime());
+    }
 
     @Override
     public String toString() {return "Training{" + "trainingId=" + trainingId + ", trainingName='" + trainingName + '\'' + '}';}
