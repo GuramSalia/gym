@@ -1,9 +1,9 @@
 -- Insert Trainers
 INSERT INTO GYM_USERS (FIRST_NAME, LAST_NAME, USERNAME, PASSWORD, IS_ACTIVE) VALUES
-('Tim', 'Smith', 'Tim.Smith', 'abcdefghij', TRUE),
-('Sam', 'Jones', 'Sam.Jones', 'bcdefghijk', TRUE),
-('John', 'Doe', 'John.Doe', 'ijklmnopqr', TRUE),
-('Jane', 'Smith', 'Jane.Smith', 'mnopqrstuv', TRUE);
+('Tim', 'Smith', 'Tim.Smith', '123', TRUE),
+('Sam', 'Jones', 'Sam.Jones', '123', TRUE),
+('John', 'Doe', 'John.Doe', '123', TRUE),
+('Jane', 'Smith', 'Jane.Smith', '123', TRUE);
 
 INSERT INTO CUSTOMERS (DATE_OF_BIRTH, ADDRESS, USER_ID) VALUES
 (DATE '2000-02-21', 'address of customer 1', 3),

@@ -15,8 +15,8 @@ import java.util.Optional;
 @Service
 public class CustomerService {
 
-    CustomerRepository customerRepository;
-    UsernameGenerator usernameGenerator;
+    private final CustomerRepository customerRepository;
+    private final UsernameGenerator usernameGenerator;
 
     @Autowired
     public CustomerService(CustomerRepository customerRepository, UsernameGenerator usernameGenerator) {
@@ -59,11 +59,12 @@ public class CustomerService {
         }
 
         if (UserService.isInvalidUser(customer)) {
+            log.info("invalid user");
             return Optional.empty();
         }
         try {
             customer.setUsername(usernameGenerator.generateUsername(customer));
-            log.info(">>>> Creating customer with username: " + customer.getUsername());
+            log.info(">>>> Updating customer with username: " + customer.getUsername());
             return Optional.of(customerRepository.save(customer));
         } catch (Exception e) {
             log.error("error updating customer", e);
@@ -85,12 +86,13 @@ public class CustomerService {
             return Optional.empty();
         }
 
-        log.info(">>>> Getting customer with username: " + username);
+        log.info(">>>> Getting customer using getByUsername: : " + username);
         return customerOptional;
     }
 
     @Transactional
     public Optional<Customer> updatePassword(Customer customer, String username, String currentPassword, String newPassword) {
+
         if (isInvalidUsernamePassword(customer, username, currentPassword)) {
             log.error("invalid username or password");
             return Optional.empty();
@@ -110,6 +112,7 @@ public class CustomerService {
 
     @Transactional
     public boolean activateCustomer(Customer customer, String username, String password) {
+
         if (isInvalidUsernamePassword(customer, username, password)) {
             log.error("invalid username or password");
             return false;
@@ -119,13 +122,14 @@ public class CustomerService {
             log.info("customer is already active");
             return false;
         }
+
         try {
             customer.setIsActive(true);
             customerRepository.save(customer);
             log.info("customer is active");
             return true;
         } catch (Exception e) {
-            log.error("couldn't activate the customer");
+            log.error("couldn't activate the customer", e);
             return false;
         }
     }
@@ -176,7 +180,7 @@ public class CustomerService {
         }
     }
 
-    public boolean isValidUsernamePassword(Customer customer, String username, String password) {
+    private boolean isValidUsernamePassword(Customer customer, String username, String password) {
         Customer customerInDb;
         try {
             Optional<Customer> customerOptional = customerRepository.findByUsernameAndPassword(username, password);
@@ -192,7 +196,7 @@ public class CustomerService {
         return customerInDb.equals(customer);
     }
 
-    public boolean isInvalidUsernamePassword(Customer customer, String username, String password) {
+    private boolean isInvalidUsernamePassword(Customer customer, String username, String password) {
         return !isValidUsernamePassword(customer, username, password);
     }
 }

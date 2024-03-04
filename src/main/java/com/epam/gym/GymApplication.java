@@ -3,6 +3,7 @@ package com.epam.gym;
 import com.epam.gym.model.Customer;
 import com.epam.gym.model.Trainer;
 import com.epam.gym.model.Training;
+import com.epam.gym.model.TrainingType;
 import com.epam.gym.service.CustomerService;
 import com.epam.gym.service.TrainerService;
 import com.epam.gym.service.TrainingService;
@@ -137,6 +138,45 @@ public class GymApplication {
         customerService.create(customer);
         log.info("Created customer with id " + customer.getUserId());
         customerService.delete(customer.getUsername(), "111");
+
+        // ----------------------------------------------------------------
+
+        log.info("create trainer");
+        log.info("update trainer");
+        log.info("updated trainer password");
+        log.info("activate active trainer");
+        log.info("deactivate active trainer");
+        log.info("deactivate inactive trainer");
+        log.info("activate inactive trainer");
+
+
+        log.info("create training with trainer of the same training type");
+        log.info("create training with trainer of the different training type");
+
+        // ----------------------------------------------------------------
+
+        log.info("create trainer");
+        Trainer trainer_3 = new Trainer();
+        trainer_3.setFirstName("Olivia");
+        trainer_3.setLastName("Bruno");
+        trainer_3.setPassword("123");
+        trainer_3.setIsActive(true);
+//        trainer_3.setSpecialization(new TrainingType(0));
+
+
+
+        log.info("update trainer");
+        log.info("updated trainer password");
+        log.info("activate active trainer");
+        log.info("deactivate active trainer");
+        log.info("deactivate inactive trainer");
+        log.info("activate inactive trainer");
+
+
+        log.info("create training with trainer of the same training type");
+        log.info("create training with trainer of the different training type");
+
+
 
         log.info("\n\n>>>> END  ==============\n");
     }
