@@ -5,7 +5,9 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -14,10 +16,6 @@ import java.util.Objects;
 @Table(name = "TRAINERS")
 @PrimaryKeyJoinColumn(name = "USER_ID")
 public class Trainer extends User{
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @Column(name = "TRAINER_ID")
-//    private Integer trainerId;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = true)
     @JoinColumn(name = "TRAINING_TYPE_ID", referencedColumnName = "TRAINING_TYPE_ID", nullable = true)
@@ -28,6 +26,9 @@ public class Trainer extends User{
     @JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID", nullable = true)
     @Column(name = "USER_ID")
     private Integer userId;
+
+    @ManyToMany(mappedBy = "trainers")
+    private Set<Customer> customers = new HashSet<>();
 
     @Override
     public String toString() {

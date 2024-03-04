@@ -6,7 +6,9 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -30,6 +32,14 @@ public class Customer extends User {
     @JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID", nullable = true)
     @Column(name = "USER_ID")
     private Integer userId;
+
+    @ManyToMany
+    @JoinTable(
+            name = "CUSTOMERS_TRAINERS",
+            joinColumns = { @JoinColumn(name = "CUSTOMER_ID") },
+            inverseJoinColumns = { @JoinColumn(name = "TRAINER_ID") }
+    )
+    Set<Trainer> trainers = new HashSet<>();
 
     @Override
     public String toString() {return "Customer{" + "customerId=" + userId + " " + getFirstName() + " " + getLastName() + '}';}
