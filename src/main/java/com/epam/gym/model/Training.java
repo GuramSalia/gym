@@ -5,8 +5,11 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
+
+import static java.time.LocalDate.now;
 
 @Getter
 @Setter
@@ -15,15 +18,22 @@ import java.util.Objects;
 @Table(name = "TRAININGS")
 public class Training {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "TRAINING_ID")
-    private int trainingId;
+    private Integer trainingId;
 
-    @Column(name = "CUSTOMER_ID")
-    private int customerId;
+    //    @Column(name = "CUSTOMER_ID")
+    @ManyToOne
+    @JoinColumn(name = "CUSTOMER_ID")
+    private Customer customer;
+//    private Integer customerId;
 
-    @Column(name = "TRAINER_ID")
-    private int trainerId;
+
+    //    @Column(name = "TRAINER_ID")
+    @ManyToOne
+    @JoinColumn(name = "TRAINER_ID")
+    private Trainer trainer;
+//    private Integer trainerId;
 
     @Column(name = "TRAINING_NAME")
     private String trainingName;
@@ -38,6 +48,28 @@ public class Training {
 
     @Column(name = "TRAINING_DURATION")
     private int trainingDurationInMinutes;
+
+    public void setTrainingDateEasy(Integer year, Integer month, Integer day) {
+        if (year > now().getYear()) {
+            log.info("birth year cannot be in the future");
+            return;
+        }
+
+        if (month > 11 || month < 0) {
+            log.info("birth month cannot be in the future");
+            return;
+        }
+
+        if (day > 31 || day < 0) {
+            log.info("birth day cannot be in the future");
+            return;
+        }
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.YEAR, year);
+        cal.set(Calendar.MONTH, month);
+        cal.set(Calendar.DAY_OF_MONTH, day);
+        setTrainingDate(cal.getTime());
+    }
 
     @Override
     public String toString() {return "Training{" + "trainingId=" + trainingId + ", trainingName='" + trainingName + '\'' + '}';}

@@ -1,0 +1,7 @@
+Related to: Customer < - > Trainer
+Q1: Customer has Set<Trainer> trainers. Is it ok if we assign a new trainer, but customer has not common training with the trainer yet?
+
+
+
+
+
