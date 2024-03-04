@@ -7,6 +7,7 @@ import com.epam.gym.model.TrainingType;
 import com.epam.gym.service.CustomerService;
 import com.epam.gym.service.TrainerService;
 import com.epam.gym.service.TrainingService;
+import com.epam.gym.service.TrainingTypeService;
 import com.epam.gym.utils.BeanProvider;
 
 import lombok.extern.slf4j.Slf4j;
@@ -35,6 +36,7 @@ public class GymApplication {
         TrainerService trainerService = BeanProvider.getTrainerService();
         CustomerService customerService = BeanProvider.getCustomerService();
         TrainingService trainingService = BeanProvider.getTrainingService();
+        TrainingTypeService trainingTypeService = BeanProvider.getTrainingTypeService();
 
         log.info("\n\n>>>> START  ==============\n");
 
@@ -155,27 +157,34 @@ public class GymApplication {
 
         // ----------------------------------------------------------------
 
+        TrainingType PILATES = trainingTypeService.getTrainingType(TrainingType.TrainingTypeEnum.PILATES);
+        TrainingType STRENGTH = trainingTypeService.getTrainingType(TrainingType.TrainingTypeEnum.STRENGTH);
+        TrainingType GROUP = trainingTypeService.getTrainingType(TrainingType.TrainingTypeEnum.GROUP);
+        TrainingType CARDIO = trainingTypeService.getTrainingType(TrainingType.TrainingTypeEnum.CARDIO);
+        TrainingType HIIT = trainingTypeService.getTrainingType(TrainingType.TrainingTypeEnum.HIIT);
+        TrainingType PERSONAL = trainingTypeService.getTrainingType(TrainingType.TrainingTypeEnum.PERSONAL);
+        TrainingType YOGA = trainingTypeService.getTrainingType(TrainingType.TrainingTypeEnum.YOGA);
+
         log.info("create trainer");
         Trainer trainer_3 = new Trainer();
         trainer_3.setFirstName("Olivia");
         trainer_3.setLastName("Bruno");
         trainer_3.setPassword("123");
         trainer_3.setIsActive(true);
-//        trainer_3.setSpecialization(new TrainingType(0));
+        trainer_3.setSpecialization(PILATES);
+        trainerService.create(trainer_3);
 
 
-
-        log.info("update trainer");
-        log.info("updated trainer password");
-        log.info("activate active trainer");
-        log.info("deactivate active trainer");
-        log.info("deactivate inactive trainer");
-        log.info("activate inactive trainer");
-
-
-        log.info("create training with trainer of the same training type");
-        log.info("create training with trainer of the different training type");
-
+//        log.info("update trainer");
+//        log.info("updated trainer password");
+//        log.info("activate active trainer");
+//        log.info("deactivate active trainer");
+//        log.info("deactivate inactive trainer");
+//        log.info("activate inactive trainer");
+//
+//
+//        log.info("create training with trainer of the same training type");
+//        log.info("create training with trainer of the different training type");
 
 
         log.info("\n\n>>>> END  ==============\n");

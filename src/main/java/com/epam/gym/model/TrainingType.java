@@ -1,8 +1,10 @@
 package com.epam.gym.model;
 
 import jakarta.persistence.*;
+import lombok.Setter;
 
 @Entity
+@Setter
 @Table(name = "TRAINING_TYPES")
 public class TrainingType {
 
@@ -19,6 +21,7 @@ public class TrainingType {
     @Enumerated(EnumType.STRING)
     @Column(name = "TRAINING_TYPE_NAME")
     private TrainingTypeEnum trainingType;
+
 
     @Override
     public String toString() {
